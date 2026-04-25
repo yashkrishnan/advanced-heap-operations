@@ -8,11 +8,11 @@ This document showcases the Advanced Heap Operations web interface through scree
 
 ### Basic Operations (default)
 ![Basic Operations](01_basic_operations.png)
-*The Basic Operations tab — landing tab — with a single card to run insert, find-min, delete-min and merge demos for all 6 heap types.*
+*The Basic Operations tab — landing tab — with a card to run insert, find-min, delete-min and merge demos for all 6 heap types. Dark Midnight Slate theme.*
 
 ### Basic Operations Output
 ![Basic Operations Output](02_basic_operations_output.png)
-*Output from running Basic Operations, demonstrating insert, find-min, delete-min, and merge for all 6 heap types.*
+*Output from running Basic Operations, demonstrating operations for all 6 heap types with VS Code-style syntax highlighting.*
 
 ---
 
@@ -32,86 +32,90 @@ This document showcases the Advanced Heap Operations web interface through scree
 
 ### Performance Comparison (default)
 ![Performance Comparison](05_performance_comparison.png)
-*The Performance Comparison tab showing the run button and the embedded chart gallery (overview + 4 per-operation charts).*
+*The Performance Comparison tab with the run button and the embedded chart gallery (overview + 4 per-operation charts).*
 
 ### Performance Comparison Output
 ![Performance Comparison Output](06_performance_comparison_output.png)
-*Benchmark text output and auto-refreshed charts after running the full comparison.*
+*Benchmark text output after running the full comparison across all 6 heap types.*
+
+### Performance Charts
+![Performance Charts](07_performance_charts.png)
+*Auto-refreshed chart gallery: overall overview + Insert, Delete-Min, Find-Min, and Merge per-operation charts.*
 
 ---
 
 ## Tab 4 — Heap Playground
 
 ### Heap Playground (default)
-![Heap Playground](07_heap_playground.png)
-*The Heap Playground tab showing a grid of 6 selectable heap cards.*
+![Heap Playground](08_heap_playground.png)
+*The Heap Playground tab showing a grid of 6 selectable heap cards on the dark theme.*
 
 ### Binomial Heap Operations
-![Binomial Heap Operations](08_heap_playground_binomial.png)
-*Binomial Heap selected (card highlighted). Insert, Find Min, and Delete Min operations performed.*
+![Binomial Heap Operations](09_heap_playground_binomial.png)
+*Binomial Heap selected (card highlighted with indigo glow). Values inserted and Find Min performed.*
 
 ### Fibonacci Heap Operations
-![Fibonacci Heap Operations](09_heap_playground_fibonacci.png)
-*Fibonacci Heap selected with multiple inserts and Find Min / Delete Min results.*
+![Fibonacci Heap Operations](10_heap_playground_fibonacci.png)
+*Fibonacci Heap selected with multiple inserts and Find Min result.*
 
 ### Min-Max Heap Operations
-![Min-Max Heap Operations](10_heap_playground_minmax.png)
+![Min-Max Heap Operations](11_heap_playground_minmax.png)
 *Min-Max Heap selected, showing the exclusive Find Max button alongside standard operations.*
 
 ### Pairing Heap Operations
-![Pairing Heap Operations](11_heap_playground_pairing.png)
-*Pairing Heap selected with Insert, Find Min, and Delete Min results.*
+![Pairing Heap Operations](12_heap_playground_pairing.png)
+*Pairing Heap selected with Insert and Find Min results.*
 
 ### Leftist Heap Operations
-![Leftist Heap Operations](12_heap_playground_leftist.png)
-*Leftist Heap selected with Insert, Find Min, and Delete Min results.*
+![Leftist Heap Operations](13_heap_playground_leftist.png)
+*Leftist Heap selected with Insert and Find Min results.*
 
 ### Skew Heap Operations
-![Skew Heap Operations](13_heap_playground_skew.png)
-*Skew Heap selected with Insert, Find Min, and Delete Min results.*
+![Skew Heap Operations](14_heap_playground_skew.png)
+*Skew Heap selected with Insert and Find Min results.*
 
 ---
 
 ## Tab 5 — Interactive Code
 
 ### Code Editor (default)
-![Interactive Code](14_interactive_code.png)
+![Interactive Code](15_interactive_code.png)
 *The Interactive Code tab with a Python console pre-loaded with example code. All 6 heap classes are pre-imported.*
 
 ### Code Execution Output
-![Interactive Code Output](15_interactive_code_output.png)
-*Output after executing custom Python code, displayed in a terminal-style format.*
+![Interactive Code Output](16_interactive_code_output.png)
+*Output after executing custom Python code showing FibonacciHeap and MinMaxHeap usage.*
 
 ---
 
 ## Tab 6 — Heap Information
 
 ### Heap Cards Overview
-![Heap Information](16_heap_information.png)
+![Heap Information](17_heap_information.png)
 *The Heap Information tab showing 6 clickable cards, one per heap type, with brief descriptions.*
 
 ### Binomial Heap Detail
-![Binomial Heap Detail](17_heap_information_binomial.png)
+![Binomial Heap Detail](18_heap_information_binomial.png)
 *Detailed view for Binomial Heap: time complexity table and recommended use cases.*
 
 ### Fibonacci Heap Detail
-![Fibonacci Heap Detail](18_heap_information_fibonacci.png)
+![Fibonacci Heap Detail](19_heap_information_fibonacci.png)
 *Detailed view for Fibonacci Heap: amortized complexities and use cases.*
 
 ### Min-Max Heap Detail
-![Min-Max Heap Detail](19_heap_information_minmax.png)
-*Detailed view for Min-Max Heap: O(1) Find Min and Find Max complexities and use cases.*
+![Min-Max Heap Detail](20_heap_information_minmax.png)
+*Detailed view for Min-Max Heap: O(1) Find Min and Find Max complexities.*
 
 ### Pairing Heap Detail
-![Pairing Heap Detail](20_heap_information_pairing.png)
+![Pairing Heap Detail](21_heap_information_pairing.png)
 *Detailed view for Pairing Heap: amortized complexities and use cases.*
 
 ### Leftist Heap Detail
-![Leftist Heap Detail](21_heap_information_leftist.png)
+![Leftist Heap Detail](22_heap_information_leftist.png)
 *Detailed view for Leftist Heap: time complexities highlighting efficient merge.*
 
 ### Skew Heap Detail
-![Skew Heap Detail](22_heap_information_skew.png)
+![Skew Heap Detail](23_heap_information_skew.png)
 *Detailed view for Skew Heap: amortized complexities for the self-adjusting variant.*
 
 ---
@@ -119,18 +123,19 @@ This document showcases the Advanced Heap Operations web interface through scree
 ## Tab 7 — Run Tests
 
 ### Tests Overview
-![Run Tests](23_run_tests.png)
+![Run Tests](24_run_tests.png)
 *The Run Tests tab with a button to execute the complete unit test suite (18 tests).*
 
 ### Test Results
-![Test Results](24_run_tests_results.png)
-*All 18 unit tests completed successfully, with colour-coded results.*
+![Test Results](25_run_tests_results.png)
+*All 18 unit tests completed successfully, with colour-coded pass/fail results.*
 
 ---
 
 ## Features Highlighted
 
-- **Modern UI**: Symmetric heap-pile SVG icon with 7 colours; purple gradient theme
+- **Modern Dark Theme**: Midnight Slate — deep navy background, indigo/violet accents, pill-style tab bar
+- **Heap Logo**: Symmetric 7-row pyramid SVG icon (28 shapes, 7 colours) in the header
 - **7 Tabs**: Basic Operations, Graph Algorithms, Performance Comparison, Heap Playground, Interactive Code, Heap Information, Run Tests
 - **Embedded Charts**: Performance Comparison tab shows 5 charts (overview + per-operation) that auto-refresh after each run
 - **Heap Playground**: Interactive operations on all 6 heap types with live state display
@@ -139,9 +144,9 @@ This document showcases the Advanced Heap Operations web interface through scree
 ## Technical Details
 
 - **Framework**: Flask (Python web framework)
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript, Inter font
 - **Port**: Auto-detection (5000–5009), typically runs on 5001 on macOS
-- **Screenshots**: Full-page, 1440px wide, Playwright Chromium, captured 2026-04-25
+- **Screenshots**: Full-page, 1400px wide, Playwright Chromium, captured 2026-04-25
 
 ---
 
