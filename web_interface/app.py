@@ -201,6 +201,14 @@ def heap_info(heap_type):
         return jsonify({'error': 'Unknown heap type'}), 404
 
 
+@app.route('/examples/image/<path:filename>')
+def serve_example_image(filename):
+    """Serve a generated chart image from the examples directory."""
+    from flask import send_from_directory
+    examples_dir = os.path.join(PROJECT_ROOT, 'examples')
+    return send_from_directory(examples_dir, filename)
+
+
 @app.route('/save_screenshot', methods=['POST'])
 def save_screenshot():
     """Save a base64-encoded screenshot to the screenshots folder"""
