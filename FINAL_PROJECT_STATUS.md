@@ -50,9 +50,9 @@
 ### 4. **Complete Documentation**
 - START_HERE.md - Quick launch guide
 - WEB_INTERFACE_SETUP.md - Setup instructions
-- SERVER_STATUS.md - Verification report
 - TESTING_GUIDE.md - Testing procedures
 - SCREENSHOTS.md - Web interface screenshots documentation
+- AGENTS.md - Development guidelines
 
 ### 5. **All Supporting Files** 
 - examples/basic_operations.py
@@ -142,6 +142,115 @@ Then open: http://localhost:5001 (or the port shown in terminal — macOS AirPla
 - Documentation
 - Setup automation
 - And more...
+
+---
+
+##  TECHNICAL DETAILS
+
+### API Endpoints
+
+- `GET /` — Main interface
+- `GET /run/<example_type>` — Run examples (basic_operations, graph_algorithms, performance_comparison)
+- `POST /run_interactive` — Execute custom code
+- `GET /heap_info/<heap_type>` — Heap details and complexity information
+- `POST /playground_operation` — Heap Playground operations (insert, find_min, delete_min, find_max, reset)
+
+### Playground Verification Results
+
+All 6 heap types tested with all operations (2026-04-25):
+
+| Heap | reset | insert | find_min | delete_min | find_max |
+|------|-------|--------|----------|------------|----------|
+| Binomial | PASS | PASS | PASS | PASS | — |
+| Fibonacci | PASS | PASS | PASS | PASS | — |
+| Min-Max | PASS | PASS | PASS | PASS | PASS |
+| Pairing | PASS | PASS | PASS | PASS | — |
+| Leftist | PASS | PASS | PASS | PASS | — |
+| Skew | PASS | PASS | PASS | PASS | — |
+
+### Environment Setup
+
+- Virtual environment: `venv/`
+- Python version: 3.14
+- Flask version: 3.1.3
+- All dependencies installed and verified
+
+### Performance Notes
+
+- Server starts in < 2 seconds
+- Page loads instantly
+- Example execution: 1-5 seconds depending on complexity
+- Playground operations: near-instant response
+
+### Browser Compatibility
+
+Tested and working on:
+- Chrome/Chromium
+- Firefox
+- Safari
+- Edge
+
+### Security Configuration
+
+- Running on localhost only (127.0.0.1)
+- Debug mode enabled (for development)
+- Not configured for production use
+- Interactive console uses `exec()` — only run trusted code
+
+### Known Limitations
+
+1. **Development Server**: Using Flask's built-in server (not for production)
+2. **Single User**: Not designed for concurrent users
+3. **Local Only**: Should not be exposed to the internet
+4. **Code Execution**: Interactive console executes arbitrary Python code
+
+---
+
+##  TROUBLESHOOTING
+
+### Server Won't Start
+
+1. **Check virtual environment is activated:**
+   ```bash
+   which python3  # Should show path to venv/bin/python3
+   ```
+
+2. **Check available ports:**
+   ```bash
+   lsof -i :5000
+   lsof -i :5001
+   ```
+
+3. **Verify Flask installation:**
+   ```bash
+   venv/bin/python3 -c "import flask; print(flask.__version__)"
+   ```
+
+4. **Check for errors in terminal output**
+
+### Permission Denied
+
+```bash
+chmod +x start_web_interface.sh
+./start_web_interface.sh
+```
+
+### Virtual Environment Not Found
+
+```bash
+./setup.sh
+./start_web_interface.sh
+```
+
+### Flask Not Found
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install flask
+cd web_interface
+python3 app.py
+```
 
 ---
 
