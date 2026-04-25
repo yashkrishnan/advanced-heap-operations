@@ -203,11 +203,13 @@ python3 app.py
 
 ## Additional Documentation
 
-- **WEB_INTERFACE_SETUP.md** - Detailed setup instructions
-- **SERVER_STATUS.md** - Verification report
-- **web_interface/README.md** - Feature documentation
-- **TESTING_GUIDE.md** - Testing procedures
 - **README.md** - Main project documentation
+- **FINAL_PROJECT_STATUS.md** - Complete project status and technical details
+- **WEB_INTERFACE_SETUP.md** - Detailed setup instructions
+- **TESTING_GUIDE.md** - Testing procedures
+- **SCREENSHOTS.md** - Web interface screenshots
+- **AGENTS.md** - Development guidelines
+- **web_interface/README.md** - Feature documentation
 
 ---
 
