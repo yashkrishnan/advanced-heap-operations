@@ -1,8 +1,6 @@
 # START HERE - Quick Launch Guide
 
-## Your Web Interface is Ready!
-
-Everything has been set up and verified. Follow these simple steps to launch the web interface.
+## Follow these simple steps to launch the web interface.
 
 ---
 
@@ -175,17 +173,17 @@ python3 app.py
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │  Advanced Heap Operations                                       │
-│  Interactive Web Interface for Heap Data Structures            │
+│  Interactive Web Interface for Heap Data Structures             │
 ├─────────────────────────────────────────────────────────────────┤
-│  [Examples] [Heap Playground] [Interactive Code] [Info] [Tests]│
+│  [Examples] [Heap Playground] [Interactive Code] [Info] [Tests] │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  Select a Heap Type:                                           │
-│  [Binomial] [Fibonacci] [Min-Max] [Pairing] [Leftist] [Skew]  │
+│  Select a Heap Type:                                            │
+│  [Binomial] [Fibonacci] [Min-Max] [Pairing] [Leftist] [Skew]    │
 │                                                                 │
-│  Value: [___]  [Insert] [Find Min] [Delete Min] [Reset]        │
+│  Value: [___]  [Insert] [Find Min] [Delete Min] [Reset]         │
 │                                                                 │
-│  > Heap initialized. Ready for operations.                     │
+│  > Heap initialized. Ready for operations.                      │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
