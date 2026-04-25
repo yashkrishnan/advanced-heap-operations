@@ -32,6 +32,7 @@ class FibonacciNode:
     """Node in a Fibonacci heap"""
     
     def __init__(self, key: Any):
+        """Initialize a Fibonacci heap node with the given key and self-referencing sibling pointers."""
         self.key = key
         self.degree = 0  # Number of children
         self.marked = False  # Whether node has lost a child
@@ -39,8 +40,9 @@ class FibonacciNode:
         self.child: Optional['FibonacciNode'] = None  # One child (circular list)
         self.left: 'FibonacciNode' = self  # Left sibling (circular)
         self.right: 'FibonacciNode' = self  # Right sibling (circular)
-    
+
     def __repr__(self):
+        """Return a developer-readable string showing key, degree, and marked state."""
         return f"FibNode(key={self.key}, degree={self.degree}, marked={self.marked})"
 
 
@@ -53,6 +55,7 @@ class FibonacciHeap:
     """
     
     def __init__(self):
+        """Initialize an empty Fibonacci heap."""
         self.min_node: Optional[FibonacciNode] = None
         self.size = 0
         self.num_trees = 0  # Number of trees in root list
@@ -344,9 +347,10 @@ class FibonacciHeap:
         return self.size
     
     def __repr__(self) -> str:
+        """Return a developer-readable summary showing tree count, size, and current minimum."""
         if self.is_empty():
             return "FibonacciHeap(empty)"
-        
+
         roots = self.get_roots()
         root_info = [f"Tree(root={root.key}, deg={root.degree})" for root in roots]
         return f"FibonacciHeap(trees={len(roots)}, size={self.size}, min={self.min_node.key})"

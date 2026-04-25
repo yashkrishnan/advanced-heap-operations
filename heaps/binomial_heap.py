@@ -24,13 +24,15 @@ class BinomialNode:
     """Node in a binomial tree"""
     
     def __init__(self, key: Any):
+        """Initialize a binomial tree node with the given key."""
         self.key = key
         self.degree = 0  # Number of children
         self.parent: Optional['BinomialNode'] = None
         self.child: Optional['BinomialNode'] = None  # Leftmost child
         self.sibling: Optional['BinomialNode'] = None  # Right sibling
-    
+
     def __repr__(self):
+        """Return a developer-readable string representation of the node."""
         return f"BinomialNode(key={self.key}, degree={self.degree})"
 
 
@@ -42,6 +44,7 @@ class BinomialHeap:
     """
     
     def __init__(self):
+        """Initialize an empty binomial heap."""
         self.head: Optional[BinomialNode] = None  # Head of the root list
         self.min_node: Optional[BinomialNode] = None  # Pointer to minimum
         self.size = 0
@@ -313,9 +316,10 @@ class BinomialHeap:
         return self.size
     
     def __repr__(self) -> str:
+        """Return a developer-readable summary of the heap's current state."""
         if self.is_empty():
             return "BinomialHeap(empty)"
-        
+
         trees = self.get_trees()
         tree_info = [f"B{tree.degree}(root={tree.key})" for tree in trees]
         return f"BinomialHeap(trees=[{', '.join(tree_info)}], size={self.size})"

@@ -201,6 +201,20 @@ def heap_info(heap_type):
         return jsonify({'error': 'Unknown heap type'}), 404
 
 
+@app.route('/save_screenshot', methods=['POST'])
+def save_screenshot():
+    """Save a base64-encoded screenshot to the screenshots folder"""
+    import base64, re
+    data = request.json
+    img_data = re.sub(r'^data:image/[^;]+;base64,', '', data['image'])
+    filename = data['filename']
+    save_dir = os.path.join(PROJECT_ROOT, 'screenshots')
+    os.makedirs(save_dir, exist_ok=True)
+    with open(os.path.join(save_dir, filename), 'wb') as f:
+        f.write(base64.b64decode(img_data))
+    return jsonify({'success': True, 'path': os.path.join(save_dir, filename)})
+
+
 # Store heap instances in memory (simple session management)
 heap_instances = {}
 
@@ -310,6 +324,7 @@ if __name__ == '__main__':
     
     # Try to find an available port
     def find_free_port(start_port=5000, max_attempts=10):
+        """Return the first available TCP port starting from start_port."""
         for port in range(start_port, start_port + max_attempts):
             try:
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

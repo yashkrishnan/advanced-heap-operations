@@ -32,12 +32,14 @@ class PairingNode:
     """Node in a pairing heap"""
     
     def __init__(self, key: Any):
+        """Initialize a pairing heap node with the given key."""
         self.key = key
         self.child: Optional['PairingNode'] = None  # Leftmost child
         self.sibling: Optional['PairingNode'] = None  # Right sibling
         self.parent: Optional['PairingNode'] = None
-    
+
     def __repr__(self):
+        """Return a developer-readable string representation of the node."""
         return f"PairingNode(key={self.key})"
 
 
@@ -50,6 +52,7 @@ class PairingHeap:
     """
     
     def __init__(self):
+        """Initialize an empty pairing heap."""
         self.root: Optional[PairingNode] = None
         self.size = 0
     
@@ -250,6 +253,7 @@ class PairingHeap:
         return self.size
     
     def __repr__(self) -> str:
+        """Return a developer-readable summary showing size and current minimum."""
         if self.is_empty():
             return "PairingHeap(empty)"
         return f"PairingHeap(size={self.size}, min={self.root.key})"

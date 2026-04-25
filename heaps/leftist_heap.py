@@ -36,12 +36,14 @@ class LeftistNode:
     """Node in a leftist heap"""
     
     def __init__(self, key: Any):
+        """Initialize a leftist heap node with the given key and zero null path length."""
         self.key = key
         self.npl = 0  # Null path length
         self.left: Optional['LeftistNode'] = None
         self.right: Optional['LeftistNode'] = None
-    
+
     def __repr__(self):
+        """Return a developer-readable string showing key and null path length."""
         return f"LeftistNode(key={self.key}, npl={self.npl})"
 
 
@@ -54,6 +56,7 @@ class LeftistHeap:
     """
     
     def __init__(self):
+        """Initialize an empty leftist heap."""
         self.root: Optional[LeftistNode] = None
         self.size = 0
     
@@ -183,6 +186,7 @@ class LeftistHeap:
         return self.size
     
     def __repr__(self) -> str:
+        """Return a developer-readable summary showing size, current minimum, and right-path length."""
         if self.is_empty():
             return "LeftistHeap(empty)"
         return f"LeftistHeap(size={self.size}, min={self.root.key}, right_path={self.get_right_path_length()})"

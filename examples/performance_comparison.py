@@ -42,6 +42,7 @@ class PerformanceTester:
     """Performance testing framework for heap operations"""
     
     def __init__(self):
+        """Initialize the tester with an empty results store and all six heap classes registered."""
         self.results = {}
         self.heap_classes = {
             'Binomial': BinomialHeap,

@@ -32,6 +32,7 @@ class HeapVisualizer:
     """Visualize heap structures"""
     
     def __init__(self):
+        """Initialize the visualizer, raising ImportError if matplotlib is unavailable."""
         if not PLOTTING_AVAILABLE:
             raise ImportError("matplotlib is required for visualization")
     
@@ -70,6 +71,7 @@ class HeapVisualizer:
         
         # Draw tree representation
         def draw_tree_node(ax, x, y, value, level, is_min_level):
+            """Draw a single heap node as a coloured circle labelled with its value and level type."""
             color = 'lightgreen' if is_min_level else 'lightcoral'
             circle = Circle((x, y), 0.25, facecolor=color, edgecolor='black', linewidth=2)
             ax.add_patch(circle)

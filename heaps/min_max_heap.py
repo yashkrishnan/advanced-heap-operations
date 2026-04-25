@@ -38,6 +38,7 @@ class MinMaxHeap:
     """
     
     def __init__(self):
+        """Initialize an empty min-max heap."""
         self.heap: List[Any] = []
     
     def is_empty(self) -> bool:
@@ -283,9 +284,10 @@ class MinMaxHeap:
         return len(self.heap)
     
     def __repr__(self) -> str:
+        """Return a developer-readable summary showing size, current min, and current max."""
         if self.is_empty():
             return "MinMaxHeap(empty)"
-        
+
         min_val = self.find_min()
         max_val = self.find_max()
         return f"MinMaxHeap(size={len(self)}, min={min_val}, max={max_val})"

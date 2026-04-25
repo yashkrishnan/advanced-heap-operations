@@ -36,11 +36,13 @@ class SkewNode:
     """Node in a skew heap"""
     
     def __init__(self, key: Any):
+        """Initialize a skew heap node with the given key."""
         self.key = key
         self.left: Optional['SkewNode'] = None
         self.right: Optional['SkewNode'] = None
-    
+
     def __repr__(self):
+        """Return a developer-readable string representation of the node."""
         return f"SkewNode(key={self.key})"
 
 
@@ -53,6 +55,7 @@ class SkewHeap:
     """
     
     def __init__(self):
+        """Initialize an empty skew heap."""
         self.root: Optional[SkewNode] = None
         self.size = 0
     
@@ -168,6 +171,7 @@ class SkewHeap:
         return self.size
     
     def __repr__(self) -> str:
+        """Return a developer-readable summary showing size, current minimum, and right-path length."""
         if self.is_empty():
             return "SkewHeap(empty)"
         return f"SkewHeap(size={self.size}, min={self.root.key}, right_path={self.get_right_path_length()})"
