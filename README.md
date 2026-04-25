@@ -163,13 +163,14 @@ Then open your browser to: **http://localhost:5001**
 
 > **Note:** macOS AirPlay Receiver occupies port 5000 by default. The server auto-detects and uses the next available port (5001). The exact URL is printed in the terminal on startup.
 
-**Features:**
-- 📚 Run all examples with one click
-- 🎮 **Heap Playground** - Select any of 6 heap types and interactively run Insert, Find Min, Delete Min, Find Max (Min-Max only), and Reset operations with real-time feedback
-- 💻 Interactive Python console
-- 📊 View heap information and complexity
-- 🧪 Run unit tests
-- 🎨 Beautiful, modern interface with large fonts
+**Features (7 tabs):**
+- ⚙️ **Basic Operations** — run insert, find-min, delete-min, merge demos for all 6 heaps
+- 🗺️ **Graph Algorithms** — Dijkstra's shortest path and Prim's MST
+- 📈 **Performance Comparison** — benchmark all 6 heaps with embedded charts (5 charts auto-refresh after each run)
+- 🎮 **Heap Playground** — select any heap type and interactively run Insert, Find Min, Delete Min, Find Max (Min-Max only), Reset
+- 💻 **Interactive Code** — Python console with all 6 heap classes pre-imported
+- 📊 **Heap Information** — time complexity tables and use-case recommendations
+- 🧪 **Run Tests** — 18-test Fibonacci Heap suite with colour-coded results
 
 See [web_interface/README.md](web_interface/README.md) for more details.
 

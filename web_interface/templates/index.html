@@ -327,7 +327,47 @@
 <body>
     <div class="container">
         <header>
-            <h1>🌳<br>Advanced Heap Operations</h1>
+            <h1>
+                <svg viewBox="-5 -8 280 140" xmlns="http://www.w3.org/2000/svg" width="200" height="100" style="display:block;margin:0 auto 8px;">
+                  <!-- All rows symmetric around x=135 with natural y-jitter and rotations -->
+                  <!-- Row 1 (2): pentagons at 115, 155 -->
+                  <polygon points="115,-3 125,5 121,17 109,17 105,5" fill="#F0E8D0" transform="rotate(-10 115 8)"/>
+                  <polygon points="155,2 165,10 161,22 149,22 145,10" fill="#9B6BB5" transform="rotate(10 155 13)"/>
+                  <!-- Row 2 (3): tri-down, circle, tri-down at 95,135,175 -->
+                  <polygon points="85,22 105,22 95,39" fill="#D95520"/>
+                  <circle cx="135" cy="26" r="10" fill="#4A90D9"/>
+                  <polygon points="165,25 185,25 175,42" fill="#E8C541"/>
+                  <!-- Row 3 (4): hexagon, circle, circle, hexagon at 75,115,155,195 -->
+                  <polygon points="85,52 80,61 70,61 65,52 70,43 80,43" fill="#6B9E76" transform="rotate(-8 75 52)"/>
+                  <circle cx="115" cy="46" r="11" fill="#F0E8D0"/>
+                  <circle cx="155" cy="50" r="10" fill="#D95520"/>
+                  <polygon points="205,54 200,63 190,63 185,54 190,45 200,45" fill="#E07B8A" transform="rotate(8 195 54)"/>
+                  <!-- Row 4 (5): tri-up, diamond, square, diamond, tri-up at 57,97,135,173,213 -->
+                  <polygon points="57,60 66,75 48,75" fill="#E8C541"/>
+                  <polygon points="97,57 108,68 97,79 86,68" fill="#F0E8D0"/>
+                  <polygon points="144,65 144,83 126,83 126,65" fill="#9B6BB5" transform="rotate(8 135 74)"/>
+                  <polygon points="173,56 184,67 173,78 162,67" fill="#4A90D9"/>
+                  <polygon points="213,62 222,77 204,77" fill="#D95520"/>
+                  <!-- Row 5 (6): hexagon, tri-down, pentagon, pentagon, tri-down, hexagon at 38,78,118,152,192,232 -->
+                  <polygon points="48,90 43,99 33,99 28,90 33,81 43,81" fill="#4A90D9" transform="rotate(-10 38 90)"/>
+                  <polygon points="68,82 88,82 78,99" fill="#E07B8A"/>
+                  <polygon points="118,84 128,91 124,102 112,102 108,91" fill="#6B9E76" transform="rotate(-6 118 94)"/>
+                  <polygon points="152,82 162,89 158,100 146,100 142,89" fill="#D95520" transform="rotate(6 152 92)"/>
+                  <polygon points="182,80 202,80 192,97" fill="#9B6BB5"/>
+                  <polygon points="242,92 237,101 227,101 222,92 227,83 237,83" fill="#E8C541" transform="rotate(10 232 92)"/>
+                  <!-- Row 6 (7): tri-down, circle, diamond, circle, diamond, circle, tri-down at 22,62,102,135,168,208,248 -->
+                  <polygon points="13,103 31,103 22,118" fill="#6B9E76"/>
+                  <circle cx="62" cy="112" r="10" fill="#F0E8D0"/>
+                  <polygon points="102,95 113,106 102,117 91,106" fill="#D95520"/>
+                  <circle cx="135" cy="110" r="10" fill="#4A90D9"/>
+                  <polygon points="168,95 179,106 168,117 157,106" fill="#E8C541"/>
+                  <circle cx="208" cy="113" r="10" fill="#F0E8D0"/>
+                  <polygon points="239,104 257,104 248,119" fill="#E07B8A"/>
+                  <!-- Ground line -->
+                  <line x1="10" y1="124" x2="260" y2="124" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+                Advanced Heap Operations
+            </h1>
             <p>Interactive Web Interface for Heap Data Structures</p>
         </header>
 

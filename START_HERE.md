@@ -51,7 +51,7 @@ Press CTRL+C to quit
 
 ### In Browser:
 - Beautiful purple gradient interface
-- 5 tabs: Examples, Heap Playground, Interactive Code, Heap Info, Tests
+- 7 tabs: Basic Operations, Graph Algorithms, Performance Comparison, Heap Playground, Interactive Code, Heap Info, Tests
 - Click buttons to run programs
 - See output in real-time
 
@@ -60,7 +60,7 @@ Press CTRL+C to quit
 ## Try These First
 
 ### 1. Run Basic Operations
-- Click the **Examples** tab
+- Click the **Basic Operations** tab
 - Click "Run Basic Operations" button
 - Watch output appear showing all 6 heap types
 
@@ -139,10 +139,15 @@ python3 app.py
 
 ## Features Available
 
-### Examples Tab
-- **Basic Operations**: Demonstrates insert, delete, merge for all 6 heaps
-- **Graph Algorithms**: Runs Dijkstra's and Prim's algorithms
-- **Performance Comparison**: Benchmarks different implementations
+### Basic Operations Tab
+- Demonstrates insert, find-min, delete-min, and merge for all 6 heap types
+
+### Graph Algorithms Tab
+- Runs Dijkstra's shortest path and Prim's minimum spanning tree
+
+### Performance Comparison Tab
+- Benchmarks all 6 heap implementations across 4 operations
+- Displays 5 embedded charts (overview + per-operation) that refresh after each run
 
 ### Heap Playground Tab
 - Select any of 6 heap types interactively
@@ -175,7 +180,7 @@ python3 app.py
 │  Advanced Heap Operations                                       │
 │  Interactive Web Interface for Heap Data Structures             │
 ├─────────────────────────────────────────────────────────────────┤
-│  [Examples] [Heap Playground] [Interactive Code] [Info] [Tests] │
+│  [Basic Ops] [Graph] [Perf] [Play] [Code] [Info] [Tests]        │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  Select a Heap Type:                                            │

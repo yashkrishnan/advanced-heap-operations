@@ -1,4 +1,4 @@
-# Test Outputs and Screenshots
+# Test Outputs
 
 ## Overview
 

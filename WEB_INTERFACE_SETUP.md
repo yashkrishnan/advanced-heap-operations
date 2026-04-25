@@ -198,12 +198,20 @@ pip install -r requirements.txt
 
 Once the server is running, test these features:
 
-### 1. Test Examples Tab
+### 1. Test Basic Operations Tab
 - Click "Run Basic Operations" button
 - Should see output from all 6 heap types
 - Output appears in terminal-style display
 
-### 2. Test Heap Playground Tab
+### 2. Test Graph Algorithms Tab
+- Click "Run Graph Algorithms" button
+- Should see Dijkstra's and Prim's results
+
+### 3. Test Performance Comparison Tab
+- Click "Run Performance Comparison" button
+- Should see benchmark output and 5 embedded charts refresh
+
+### 4. Test Heap Playground Tab
 - Click on any heap card (e.g., "Fibonacci Heap") — the card should highlight
 - Type a number in the input field and click **Insert**
 - Click **Find Min** — should return the minimum value
@@ -212,7 +220,7 @@ Once the server is running, test these features:
 - Click **Reset** to clear the heap and start over
 - All 6 heap types (Binomial, Fibonacci, Min-Max, Pairing, Leftist, Skew) are fully functional
 
-### 3. Test Interactive Code Tab
+### 5. Test Interactive Code Tab
 - Enter code:
   ```python
   heap = FibonacciHeap()
@@ -223,11 +231,11 @@ Once the server is running, test these features:
 - Click "Execute Code"
 - Should see: `Min: 5`
 
-### 4. Test Heap Information Tab
+### 6. Test Heap Information Tab
 - Click on "Fibonacci Heap" card
 - Should see detailed information with complexity table
 
-### 5. Test Tests Tab
+### 7. Test Tests Tab
 - Click "Run All Tests"
 - Should see 18 tests running
 - All tests should pass
@@ -236,7 +244,7 @@ Once the server is running, test these features:
 
 ### Browser View
 - Modern purple gradient interface
-- 5 tabs at the top: Examples, Heap Playground, Interactive Code, Heap Information, Run Tests
+- 7 tabs at the top: Basic Operations, Graph Algorithms, Performance Comparison, Heap Playground, Interactive Code, Heap Information, Run Tests
 - Cards with "Run" buttons
 - Terminal-style output displays
 - Smooth animations

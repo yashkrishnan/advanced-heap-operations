@@ -4,18 +4,23 @@ A beautiful, interactive web interface to run and visualize heap operations thro
 
 ## Features
 
-###  Examples Tab
-- **Basic Operations**: Run demonstrations of all 6 heap types
-- **Graph Algorithms**: Execute Dijkstra's and Prim's algorithms
-- **Performance Comparison**: Benchmark different heap implementations
+### ⚙️ Basic Operations Tab
+- Run demonstrations of all 6 heap types (insert, find-min, delete-min, merge)
 
-###  Heap Playground Tab (NEW!)
+### 🗺️ Graph Algorithms Tab
+- Execute Dijkstra's shortest path and Prim's minimum spanning tree algorithms
+
+### 📈 Performance Comparison Tab
+- Benchmark all 6 heap implementations across insert, delete-min, find-min, and merge
+- Embedded chart gallery: 1 combined overview + 4 per-operation charts
+- Charts auto-refresh (cache-busted) after each run
+
+### 🎮 Heap Playground Tab
 - **Interactive heap operations** with real-time feedback
 - Select any of the 6 heap types
 - Perform operations: Insert, Find Min, Delete Min, Find Max (Min-Max only)
 - View heap state after each operation
 - Reset heap at any time
-- Large, easy-to-read fonts (18-24px)
 
 ###  Interactive Code Tab
 - Write and execute Python code in real-time
@@ -128,10 +133,7 @@ Perform heap operations in the playground
 ## Troubleshooting
 
 ### Port Already in Use
-If port 5000 is already in use, you can change it in `app.py`:
-```python
-app.run(debug=True, host='0.0.0.0', port=5001)  # Change port here
-```
+The server auto-detects the first free port in the range 5000–5009 (typically 5001 on macOS, where AirPlay Receiver occupies 5000). The exact URL is printed in the terminal on startup.
 
 ### Module Not Found Errors
 Ensure you've activated the virtual environment and installed all dependencies:

@@ -8,13 +8,20 @@
 - Responsive design
 - **Large, readable fonts (18-24px throughout)**
 
-### 2. **All 5 Tabs** 
+### 2. **All 7 Tabs**
 
-####  Examples Tab
+#### ⚙️ Basic Operations Tab
 - Run Basic Operations (all 6 heap types)
-- Run Graph Algorithms (Dijkstra's & Prim's)
-- Run Performance Comparison
 - Syntax-highlighted, colorized output
+
+#### 🗺️ Graph Algorithms Tab
+- Run Dijkstra's shortest path and Prim's minimum spanning tree
+- Syntax-highlighted output
+
+#### 📈 Performance Comparison Tab
+- Run benchmarks across all 6 heaps and 4 operations
+- Embedded chart gallery (5 PNG charts: overview + per-operation)
+- Charts auto-refresh after each run
 
 ####  Heap Playground Tab
 - Grid of 6 selectable heap cards (Binomial, Fibonacci, Min-Max, Pairing, Leftist, Skew)
@@ -92,7 +99,7 @@
 ### What Works Now:
 
  **Web interface is fully functional**
- **All 5 tabs working perfectly**
+ **All 7 tabs working perfectly**
  **Heap Playground — all 6 heap types, all operations verified**
  **Large, readable fonts throughout**
  **Automatic port detection (uses 5001 if 5000 is taken by AirPlay)**
