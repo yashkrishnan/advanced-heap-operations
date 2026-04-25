@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Heap Operations - Web Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 15px 25px;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background: #e0e0e0;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .output-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            line-height: 1.8;
+            max-height: 600px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .output-container .section-header {
+            color: #4EC9B0;
+            font-weight: bold;
+            font-size: 24px;
+            margin: 15px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #4EC9B0;
+        }
+
+        .output-container .heap-name {
+            color: #DCDCAA;
+            font-weight: bold;
+        }
+
+        .output-container .operation {
+            color: #9CDCFE;
+        }
+
+        .output-container .value {
+            color: #CE9178;
+        }
+
+        .output-container .success-line {
+            color: #4EC9B0;
+        }
+
+        .output-container .separator {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .output-container .test-pass {
+            color: #4EC9B0;
+        }
+
+        .output-container .test-fail {
+            color: #F48771;
+        }
+
+        .output-container .metric {
+            color: #B5CEA8;
+        }
+
+        .output-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .output-container::-webkit-scrollbar-track {
+            background: #2d2d2d;
+            border-radius: 10px;
+        }
+
+        .output-container::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .heap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .heap-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .heap-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .heap-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .complexity-table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        .complexity-table td {
+            padding: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .complexity-table td:first-child {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .complexity-table td:last-child {
+            color: #667eea;
+            font-family: 'Courier New', monospace;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .error {
+            color: #ff4444;
+            background: #ffe0e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .success {
+            color: #00C851;
+            background: #e0ffe0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .info-box strong {
+            color: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌳 Advanced Heap Operations</h1>
+            <p>Interactive Web Interface for Heap Data Structures</p>
+        </header>
+
+        <div class="main-content">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('examples', event)">📚 Examples</button>
+                <button class="tab" onclick="showTab('playground', event)">🎮 Heap Playground</button>
+                <button class="tab" onclick="showTab('interactive', event)">💻 Interactive Code</button>
+                <button class="tab" onclick="showTab('heaps', event)">📊 Heap Information</button>
+                <button class="tab" onclick="showTab('tests', event)">🧪 Run Tests</button>
+            </div>
+
+            <!-- Examples Tab -->
+            <div id="examples" class="tab-content active">
+                <div class="card">
+                    <h3>Basic Operations</h3>
+                    <p>Demonstrates basic operations (insert, find-min, delete-min, merge) for all six heap types.</p>
+                    <button class="btn" onclick="runExample('basic_operations')">
+                        <span id="btn-basic">Run Basic Operations</span>
+                    </button>
+                    <div id="output-basic" class="output-container" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Graph Algorithms</h3>
+                    <p>Demonstrates Dijkstra's shortest path and Prim's minimum spanning tree algorithms using different heap implementations.</p>
+                    <button class="btn" onclick="runExample('graph_algorithms')">
+                        <span id="btn-graph">Run Graph Algorithms</span>
+                    </button>
+                    <div id="output-graph" class="output-container" style="display:none;"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Performance Comparison</h3>
+                    <p>Benchmarks and compares the performance of different heap implementations.</p>
+                    <button class="btn" onclick="runExample('performance_comparison')">
+                        <span id="btn-perf">Run Performance Comparison</span>
+                    </button>
+                    <div id="output-perf" class="output-container" style="display:none;"></div>
+                </div>
+            </div>
+
+            <!-- Heap Playground Tab -->
+            <div id="playground" class="tab-content">
+                <h2 style="margin-bottom: 20px; color: #333;">🎮 Heap Playground</h2>
+                <p style="font-size: 1.1em; color: #666; margin-bottom: 30px;">Select a heap type and perform operations interactively</p>
+                
+                <div class="heap-grid">
+                    <div class="heap-card" onclick="selectHeap('binomial', event)">
+                        <h4>Binomial Heap</h4>
+                        <p>Efficient merge operations</p>
+                    </div>
+                    <div class="heap-card" onclick="selectHeap('fibonacci', event)">
+                        <h4>Fibonacci Heap</h4>
+                        <p>Best amortized complexity</p>
+                    </div>
+                    <div class="heap-card" onclick="selectHeap('minmax', event)">
+                        <h4>Min-Max Heap</h4>
+                        <p>Access both min and max</p>
+                    </div>
+                    <div class="heap-card" onclick="selectHeap('pairing', event)">
+                        <h4>Pairing Heap</h4>
+                        <p>Simple and practical</p>
+                    </div>
+                    <div class="heap-card" onclick="selectHeap('leftist', event)">
+                        <h4>Leftist Heap</h4>
+                        <p>Optimized for merging</p>
+                    </div>
+                    <div class="heap-card" onclick="selectHeap('skew', event)">
+                        <h4>Skew Heap</h4>
+                        <p>Self-adjusting structure</p>
+                    </div>
+                </div>
+
+                <div id="playground-controls" style="display:none; margin-top: 30px;">
+                    <div class="card">
+                        <h3 id="selected-heap-title">Heap Operations</h3>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <input type="number" id="insert-value" placeholder="Enter value"
+                                   style="padding: 12px; font-size: 18px; border: 2px solid #667eea; border-radius: 8px; width: 200px;">
+                            <button class="btn" onclick="performOperation('insert')">Insert</button>
+                            <button class="btn" onclick="performOperation('find_min')">Find Min</button>
+                            <button class="btn" onclick="performOperation('delete_min')">Delete Min</button>
+                            <button class="btn" id="find-max-btn" onclick="performOperation('find_max')" style="display:none;">Find Max</button>
+                            <button class="btn" onclick="performOperation('reset')" style="background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);">Reset Heap</button>
+                        </div>
+                        <div id="playground-output" class="output-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Code Tab -->
+            <div id="interactive" class="tab-content">
+                <div class="card">
+                    <h3>Interactive Python Console</h3>
+                    <div class="info-box">
+                        <strong>Available imports:</strong> BinomialHeap, FibonacciHeap, MinMaxHeap, PairingHeap, LeftistHeap, SkewHeap
+                    </div>
+                    <p>Write and execute Python code to interact with heap data structures:</p>
+                    <textarea id="code-input" placeholder="# Example:
+heap = FibonacciHeap()
+heap.insert(10)
+heap.insert(5)
+heap.insert(20)
+print(f'Minimum: {heap.find_min()}')
+print(f'Deleted: {heap.delete_min()}')
+print(f'New minimum: {heap.find_min()}')"></textarea>
+                    <button class="btn" onclick="runInteractive()">
+                        <span id="btn-interactive">Execute Code</span>
+                    </button>
+                    <div id="output-interactive" class="output-container" style="display:none;"></div>
+                </div>
+            </div>
+
+            <!-- Heap Information Tab -->
+            <div id="heaps" class="tab-content">
+                <h2 style="margin-bottom: 20px; color: #333;">Heap Data Structures</h2>
+                <div class="heap-grid">
+                    <div class="heap-card" onclick="showHeapInfo('binomial')">
+                        <h4>Binomial Heap</h4>
+                        <p>Collection of binomial trees with efficient merge operations</p>
+                    </div>
+                    <div class="heap-card" onclick="showHeapInfo('fibonacci')">
+                        <h4>Fibonacci Heap</h4>
+                        <p>Lazy heap with excellent amortized performance</p>
+                    </div>
+                    <div class="heap-card" onclick="showHeapInfo('minmax')">
+                        <h4>Min-Max Heap</h4>
+                        <p>Double-ended priority queue</p>
+                    </div>
+                    <div class="heap-card" onclick="showHeapInfo('pairing')">
+                        <h4>Pairing Heap</h4>
+                        <p>Simple multiway tree with good practical performance</p>
+                    </div>
+                    <div class="heap-card" onclick="showHeapInfo('leftist')">
+                        <h4>Leftist Heap</h4>
+                        <p>Binary tree optimized for efficient merging</p>
+                    </div>
+                    <div class="heap-card" onclick="showHeapInfo('skew')">
+                        <h4>Skew Heap</h4>
+                        <p>Self-adjusting variant of leftist heap</p>
+                    </div>
+                </div>
+                <div id="heap-details" style="margin-top: 30px;"></div>
+            </div>
+
+            <!-- Tests Tab -->
+            <div id="tests" class="tab-content">
+                <div class="card">
+                    <h3>Unit Tests</h3>
+                    <p>Run the complete test suite for Fibonacci Heap implementation (18 tests).</p>
+                    <button class="btn" onclick="runExample('tests')">
+                        <span id="btn-tests">Run All Tests</span>
+                    </button>
+                    <div id="output-tests" class="output-container" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName, event) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        async function runExample(exampleType) {
+            const btnId = exampleType === 'basic_operations' ? 'basic' : 
+                         exampleType === 'graph_algorithms' ? 'graph' :
+                         exampleType === 'performance_comparison' ? 'perf' : 'tests';
+            
+            const btnElement = document.getElementById(`btn-${btnId}`);
+            const outputElement = document.getElementById(`output-${btnId}`);
+            
+            // Show loading state
+            btnElement.innerHTML = '<span class="loading"></span> Running...';
+            btnElement.parentElement.disabled = true;
+            outputElement.style.display = 'block';
+            outputElement.textContent = 'Executing... Please wait...';
+
+            try {
+                const response = await fetch(`/run/${exampleType}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    // Format and colorize the output
+                    outputElement.innerHTML = formatOutput(data.output, exampleType);
+                    if (data.error) {
+                        outputElement.innerHTML += '\n\n<div class="error">Errors:\n' + data.error + '</div>';
+                    }
+                } else {
+                    outputElement.innerHTML = `<div class="error">Error: ${data.error}\n\n${data.traceback || ''}</div>`;
+                }
+            } catch (error) {
+                outputElement.innerHTML = `<div class="error">Failed to run example: ${error.message}</div>`;
+            } finally {
+                btnElement.innerHTML = btnId === 'basic' ? 'Run Basic Operations' :
+                                      btnId === 'graph' ? 'Run Graph Algorithms' :
+                                      btnId === 'perf' ? 'Run Performance Comparison' : 'Run All Tests';
+                btnElement.parentElement.disabled = false;
+            }
+        }
+
+        function formatOutput(text, type) {
+            if (!text) return '(No output)';
+            
+            // Escape HTML
+            text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            // Format based on type
+            if (type === 'tests') {
+                return formatTestOutput(text);
+            } else {
+                return formatGeneralOutput(text);
+            }
+        }
+
+        function formatTestOutput(text) {
+            let formatted = text;
+            
+            // Highlight test results
+            formatted = formatted.replace(/(test_\w+.*?)\s+\.\.\.\s+(ok|FAIL|ERROR)/g,
+                (match, testName, result) => {
+                    const resultClass = result === 'ok' ? 'test-pass' : 'test-fail';
+                    return `<span class="operation">${testName}</span> ... <span class="${resultClass}">${result}</span>`;
+                });
+            
+            // Highlight summary line
+            formatted = formatted.replace(/(Ran \d+ tests.*)/g, '<span class="metric">$1</span>');
+            formatted = formatted.replace(/(OK|FAILED)/g, '<span class="success-line">$1</span>');
+            
+            // Highlight separators
+            formatted = formatted.replace(/^(-{70})/gm, '<span class="separator">$1</span>');
+            formatted = formatted.replace(/^(={70})/gm, '<span class="separator">$1</span>');
+            
+            return formatted;
+        }
+
+        function formatGeneralOutput(text) {
+            let formatted = text;
+            
+            // Highlight section headers (lines with ===)
+            formatted = formatted.replace(/^(={3,}.*?={3,})$/gm, '<span class="section-header">$1</span>');
+            
+            // Highlight heap names
+            formatted = formatted.replace(/(Binomial|Fibonacci|Min-Max|Pairing|Leftist|Skew)\s+Heap/g,
+                '<span class="heap-name">$1 Heap</span>');
+            
+            // Highlight operations
+            formatted = formatted.replace(/(Inserting|Deleting|Merging|Minimum|Maximum|New minimum|Speedup):/g,
+                '<span class="operation">$1:</span>');
+            
+            // Highlight numbers and values
+            formatted = formatted.replace(/\b(\d+(?:\.\d+)?)\b/g, '<span class="value">$1</span>');
+            
+            // Highlight success indicators
+            formatted = formatted.replace(/(completed|successful|passed|OK)/gi,
+                '<span class="success-line">$1</span>');
+            
+            // Highlight algorithm names
+            formatted = formatted.replace(/(Dijkstra's|Prim's)\s+Algorithm/g,
+                '<span class="heap-name">$1 Algorithm</span>');
+            
+            // Highlight performance metrics
+            formatted = formatted.replace(/(time|seconds|weight):/gi,
+                '<span class="metric">$1:</span>');
+            
+            return formatted;
+        }
+
+        async function runInteractive() {
+            const code = document.getElementById('code-input').value;
+            const btnElement = document.getElementById('btn-interactive');
+            const outputElement = document.getElementById('output-interactive');
+
+            btnElement.innerHTML = '<span class="loading"></span> Executing...';
+            btnElement.parentElement.disabled = true;
+            outputElement.style.display = 'block';
+            outputElement.textContent = 'Executing code...';
+
+            try {
+                const response = await fetch('/run_interactive', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ code: code })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    const formattedOutput = formatOutput(data.output || '(No output)', 'interactive');
+                    outputElement.innerHTML = `<div class="success">✓ Execution successful</div>\n\n${formattedOutput}`;
+                } else {
+                    outputElement.innerHTML = `<div class="error">❌ Error: ${data.error}\n\n${data.traceback || ''}</div>`;
+                }
+            } catch (error) {
+                outputElement.innerHTML = `<div class="error">Failed to execute code: ${error.message}</div>`;
+            } finally {
+                btnElement.innerHTML = 'Execute Code';
+                btnElement.parentElement.disabled = false;
+            }
+        }
+
+        async function showHeapInfo(heapType) {
+            const detailsElement = document.getElementById('heap-details');
+            detailsElement.innerHTML = '<p>Loading...</p>';
+
+            try {
+                const response = await fetch(`/heap_info/${heapType}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    detailsElement.innerHTML = `<div class="error">${data.error}</div>`;
+                    return;
+                }
+
+                let html = `
+                    <div class="card">
+                        <h3>${data.name}</h3>
+                        <p>${data.description}</p>
+                        
+                        <h4 style="margin-top: 20px; color: #667eea;">Time Complexity</h4>
+                        <table class="complexity-table">
+                `;
+
+                for (const [operation, complexity] of Object.entries(data.complexity)) {
+                    html += `
+                        <tr>
+                            <td>${operation.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</td>
+                            <td>${complexity}</td>
+                        </tr>
+                    `;
+                }
+
+                html += `
+                        </table>
+                        
+                        <h4 style="margin-top: 20px; color: #667eea;">Use Cases</h4>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                `;
+
+                for (const useCase of data.use_cases) {
+                    html += `<li style="margin-bottom: 8px; color: #666;">${useCase}</li>`;
+                }
+
+                html += `
+                        </ul>
+                    </div>
+                `;
+
+                detailsElement.innerHTML = html;
+            } catch (error) {
+                detailsElement.innerHTML = `<div class="error">Failed to load heap information: ${error.message}</div>`;
+            }
+        }
+
+        // Heap Playground Functions
+        let selectedHeapType = null;
+
+        function selectHeap(heapType, event) {
+            selectedHeapType = heapType;
+
+            // Update UI to show selected heap
+            document.querySelectorAll('.heap-card').forEach(card => {
+                card.style.border = '2px solid #e0e0e0';
+                card.style.transform = 'scale(1)';
+            });
+            event.target.closest('.heap-card').style.border = '3px solid #667eea';
+            event.target.closest('.heap-card').style.transform = 'scale(1.05)';
+            
+            // Show controls
+            document.getElementById('playground-controls').style.display = 'block';
+            
+            // Update title
+            const heapNames = {
+                'binomial': 'Binomial Heap',
+                'fibonacci': 'Fibonacci Heap',
+                'minmax': 'Min-Max Heap',
+                'pairing': 'Pairing Heap',
+                'leftist': 'Leftist Heap',
+                'skew': 'Skew Heap'
+            };
+            document.getElementById('selected-heap-title').textContent = heapNames[heapType] + ' Operations';
+            
+            // Show/hide Find Max button for Min-Max heap
+            const findMaxBtn = document.getElementById('find-max-btn');
+            if (heapType === 'minmax') {
+                findMaxBtn.style.display = 'inline-block';
+            } else {
+                findMaxBtn.style.display = 'none';
+            }
+            
+            // Clear output and reset heap
+            document.getElementById('playground-output').innerHTML = '<div class="success">✓ Heap initialized. Ready for operations.</div>';
+            
+            // Initialize heap on backend
+            performOperation('reset', true);
+        }
+
+        async function performOperation(operation, silent = false) {
+            if (!selectedHeapType) {
+                alert('Please select a heap type first!');
+                return;
+            }
+
+            const outputElement = document.getElementById('playground-output');
+            const insertValue = document.getElementById('insert-value').value;
+
+            // Validate insert operation
+            if (operation === 'insert' && !insertValue) {
+                outputElement.innerHTML = '<div class="error">❌ Please enter a value to insert</div>';
+                return;
+            }
+
+            if (!silent) {
+                outputElement.innerHTML = '<div>Processing...</div>';
+            }
+
+            try {
+                const response = await fetch('/playground_operation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        heap_type: selectedHeapType,
+                        operation: operation,
+                        value: insertValue ? parseInt(insertValue) : null
+                    })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    let output = '';
+                    
+                    if (operation === 'reset') {
+                        if (!silent) {
+                            output = '<div class="success">✓ Heap reset successfully</div>';
+                        }
+                    } else if (operation === 'insert') {
+                        output = `<div class="success">✓ Inserted value: <span class="value">${insertValue}</span></div>`;
+                        document.getElementById('insert-value').value = '';
+                    } else if (operation === 'find_min' || operation === 'find_max') {
+                        if (data.result !== null) {
+                            const opName = operation === 'find_min' ? 'Minimum' : 'Maximum';
+                            output = `<div class="success">✓ ${opName} value: <span class="value">${data.result}</span></div>`;
+                        } else {
+                            output = '<div class="error">❌ Heap is empty</div>';
+                        }
+                    } else if (operation === 'delete_min') {
+                        if (data.result !== null) {
+                            output = `<div class="success">✓ Deleted minimum value: <span class="value">${data.result}</span></div>`;
+                        } else {
+                            output = '<div class="error">❌ Heap is empty</div>';
+                        }
+                    }
+                    
+                    if (data.heap_state) {
+                        output += `<div style="margin-top: 15px; padding: 15px; background: #f0f0f0; border-radius: 8px;">`;
+                        output += `<strong>Heap State:</strong><br>`;
+                        output += `Size: <span class="value">${data.heap_state.size}</span><br>`;
+                        if (data.heap_state.min !== null) {
+                            output += `Current Min: <span class="value">${data.heap_state.min}</span>`;
+                        }
+                        if (data.heap_state.max !== null) {
+                            output += `<br>Current Max: <span class="value">${data.heap_state.max}</span>`;
+                        }
+                        output += `</div>`;
+                    }
+                    
+                    if (!silent) {
+                        outputElement.innerHTML = output;
+                    }
+                } else {
+                    outputElement.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+                }
+            } catch (error) {
+                outputElement.innerHTML = `<div class="error">❌ Failed to perform operation: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
